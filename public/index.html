@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ॐ ANURAG MISHRA BOT PANEL ॐ</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Philosopher:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    height: 100%;
+    font-family: 'Philosopher', sans-serif;
+    background: url('https://files.catbox.moe/z780rv.jpg') no-repeat center center fixed;
+    background-size: cover;
+    overflow-x: hidden;
+    color: #FFFDE7;
+    scroll-behavior: smooth;
+  }
+
+  /* Smooth overlay (optimized blur + GPU friendly) */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(8px) saturate(120%);
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
+    z-index: -1;
+    transition: all 0.8s ease-in-out;
+  }
+
+  /* MAIN WRAPPER */
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    transition: transform 0.3s ease-out;
+  }
+
+  h1 {
+    font-family: 'Cinzel Decorative', serif;
+    color: #FFD700;
+    font-size: 3.8em;
+    text-shadow: 0 0 20px #FFD700, 0 0 40px #FF8C00;
+    margin-bottom: 25px;
+    animation: glowTitle 5s ease-in-out infinite alternate;
+    will-change: filter;
+  }
+
+  @keyframes glowTitle {
+    from { text-shadow: 0 0 25px #FFD700, 0 0 45px #FF8C00; }
+    to { text-shadow: 0 0 55px #FFD700, 0 0 90px #FFA500; }
+  }
+
+  /* TRANSPARENT DIVINE BOXES (lighter blur) */
+  #controls, #log, .action-box { /* Added .action-box */
+    width: 85%;
+    max-width: 700px;
+    margin: 15px auto;
+    padding: 25px 30px;
+    border-radius: 25px;
+    border: 2px solid rgba(255,215,0,0.4);
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 0 25px rgba(255,215,0,0.15);
+    transition: all 0.5s ease;
+    transform: translateY(0);
+  }
+
+  #controls:hover, #log:hover, .action-box:hover { /* Added .action-box */
+    transform: translateY(-3px);
+    box-shadow: 0 0 35px rgba(255,215,0,0.3), 0 0 55px rgba(0,255,255,0.2);
+  }
+
+  /* Added style for the new action boxes */
+  .action-box {
+      border: 2px solid rgba(0,255,255,0.4);
+      box-shadow: 0 0 25px rgba(0,255,255,0.15);
+      margin-top: 25px;
+      text-align: left;
+  }
+  .action-box h3 {
+      font-family: 'Cinzel Decorative', serif;
+      color: #00FFFF;
+      text-shadow: 0 0 10px #00FFFF;
+      margin-bottom: 10px;
+      font-size: 1.5em;
+      text-align: center;
+  }
+
+  input, textarea {
+    width: 100%;
+    margin: 10px 0;
+    padding: 13px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.05);
+    color: #FFF;
+    border: 1px solid rgba(255,215,0,0.4);
+    font-size: 1.05em;
+    outline: none;
+    resize: vertical;
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+
+  input:focus, textarea:focus {
+    background: rgba(255,255,255,0.12);
+    box-shadow: 0 0 10px #FFD700;
+  }
+
+  button {
+    margin: 8px;
+    padding: 12px 28px;
+    font-size: 1.05em;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    color: #111;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255,215,0,0.4);
+    transition: transform 0.25s ease, box-shadow 0.3s ease;
+  }
+
+  button:hover {
+    transform: scale(1.04) translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255,215,0,0.7);
+  }
+  
+  /* Specific button styles for clarity */
+  .action-box button.on {
+      background: linear-gradient(45deg, #00FF00, #00AA00);
+      color: #fff;
+  }
+  .action-box button.off {
+      background: linear-gradient(45deg, #FF0000, #AA0000);
+      color: #fff;
+  }
+  
+  .action-box input {
+      border: 1px solid rgba(0,255,255,0.4);
+  }
+  .action-box input:focus {
+      box-shadow: 0 0 10px #00FFFF;
+  }
+
+
+  #log {
+    color: #00FF99;
+    text-shadow: 0 0 8px #00FF99;
+    font-weight: bold;
+    height: 380px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    scroll-behavior: smooth;
+  }
+
+  #log::-webkit-scrollbar { width: 8px; }
+  #log::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #FFD700, #FFA500);
+    border-radius: 8px;
+  }
+
+  footer {
+    margin-top: 25px;
+    font-size: 1.05em;
+    color: #ccc;
+    opacity: 0.9;
+  }
+
+  footer a {
+    color: #FFD700;
+    text-decoration: none;
+    margin: 0 6px;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #FFFDE7;
+    text-shadow: 0 0 10px #FFD700;
+  }
+
+  /* Divine Popup smoother (Unchanged) */
+  #divine-popup {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; visibility: hidden;
+    transition: all 0.7s ease;
+    z-index: 999;
+  }
+
+  #divine-popup.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .popup-content {
+    font-family: 'Cinzel Decorative', serif;
+    color: #FFD700;
+    font-size: 5em;
+    text-shadow: 0 0 35px #FFD700, 0 0 55px #FF8C00, 0 0 75px #00FFFF;
+    animation: popup 1.2s ease forwards;
+  }
+
+  @keyframes popup {
+    0% { transform: scale(0.5); opacity: 0; filter: blur(5px); }
+    60% { transform: scale(1.1); opacity: 1; filter: blur(0); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  /* Gold Particles (Unchanged) */
+  .particle {
+    position: fixed;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: rgba(255,215,0,0.7);
+    animation: float 10s infinite ease-in-out alternate;
+    z-index: -2;
+    filter: blur(1px);
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0) translateX(0) scale(0.8); opacity: 0.3; }
+    50% { transform: translateY(-60px) translateX(20px) scale(1); opacity: 0.8; }
+    100% { transform: translateY(0) translateX(-20px) scale(0.8); opacity: 0.3; }
+  }
+</style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div id="divine-popup">
+      <div class="popup-content">JAI SHREE KRISHNA</div>
+    </div>
+
+    <h1>ॐ ANURAG MISHRA ॐ</h1>
+
+    <div id="controls">
+      <input type="text" id="adminUID" placeholder="Enter Admin UID (Bot Owner ID)">
+      <textarea id="appstate" placeholder="Paste your Facebook Appstate JSON here..."></textarea>
+      <div>
+        <button onclick="startBot()">🚀 START BOT</button>
+        <button onclick="stopBot()">🛑 STOP BOT</button>
+        <button onclick="getLogs()">📜 REFRESH LOGS</button>
+      </div>
+    </div>
+    
+    <div class="action-box">
+        <h3>Group Synchronization Actions</h3>
+        <input type="text" id="groupThreadID" placeholder="Enter Group/Thread ID to Sync (Required)">
+        
+        <input type="text" id="groupNameInput" placeholder="New Group Name to Lock">
+        <button onclick="groupNameAction('lock')">🔒 Lock Group Name</button>
+        <button onclick="groupNameAction('unlock')" class="off">🔓 Unlock Group Name</button>
+        
+        <hr style="border-color: rgba(255,215,0,0.3); margin: 15px 0;">
+        
+        <input type="text" id="nickNameInput" placeholder="New Nickname to Lock All Members">
+        <button onclick="nickLockAction('apply')">🔐 Apply Nick Lock</button>
+        <button onclick="nickLockAction('remove')" class="off">🔑 Remove Nick Lock</button>
+
+        <hr style="border-color: rgba(255,215,0,0.3); margin: 15px 0;">
+        
+        <p style="margin: 10px 0; text-align: center;">**Message Blocking (Deletes incoming messages)**</p>
+        <button onclick="messageBlockAction('on')" class="on">🛑 Block Messages ON</button>
+        <button onclick="messageBlockAction('off')" class="off">🟢 Block Messages OFF</button>
+        
+    </div>
+
+    <div id="log">💻 Waiting for bot logs...</div>
+
+    <footer>
+      Made with 💛 Divine Guidance by <b style="color:#FFD700;">Anurag Mishra</b><br>
+      <a href="https://www.facebook.com/profile.php?id=61579227778616" target="_blank">🌐 Facebook</a> |
+      <a href="https://wa.me/916394812128" target="_blank">💬 WhatsApp</a>
+    </footer>
+  </div>
+
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script>
+    const socket = io();
+    const logDiv = document.getElementById("log");
+
+    function showDivinePopup() {
+      const popup = document.getElementById('divine-popup');
+      popup.classList.add('visible');
+      setTimeout(() => popup.classList.remove('visible'), 2800);
+    }
+
+    // New centralized function to call bot actions
+    function botAction(action, threadID, value = null) {
+        const uid = document.getElementById("adminUID").value.trim();
+        if (!uid) { alert("⚠️ Enter Admin UID!"); return; }
+        if (!threadID) { alert("⚠️ Group/Thread ID is required for this action!"); return; }
+
+        fetch("/bot-action", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ uid, action, threadID, value })
+        })
+        .then(r => r.text())
+        .then(alert);
+    }
+    
+    // Group Name Actions
+    function groupNameAction(type) {
+        const threadID = document.getElementById("groupThreadID").value.trim();
+        const name = document.getElementById("groupNameInput").value.trim();
+        if (type === 'lock') {
+            if (!name) { alert("⚠️ Group Name is required to lock!"); return; }
+            botAction('groupNameLock', threadID, name);
+        } else {
+            botAction('groupNameUnlock', threadID);
+        }
+    }
+    
+    // Nickname Lock Actions
+    function nickLockAction(type) {
+        const threadID = document.getElementById("groupThreadID").value.trim();
+        const nick = document.getElementById("nickNameInput").value.trim();
+        if (type === 'apply') {
+            if (!nick) { alert("⚠️ Nickname is required to lock!"); return; }
+            botAction('nickLockApply', threadID, nick);
+        } else {
+            botAction('nickLockRemove', threadID);
+        }
+    }
+
+    // Message Block Actions
+    function messageBlockAction(type) {
+        const threadID = document.getElementById("groupThreadID").value.trim();
+        if (type === 'on') {
+            botAction('messageBlockOn', threadID);
+        } else {
+            botAction('messageBlockOff', threadID);
+        }
+    }
+
+    function startBot(){
+      const uid=document.getElementById("adminUID").value.trim();
+      const appstate=document.getElementById("appstate").value.trim();
+      if(!uid||!appstate){alert("⚠️ Admin UID & Appstate required!");return;}
+      fetch("/start-bot",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({admin:uid,appstate})})
+      .then(r=>r.text())
+      .then(res=>{
+        alert(res);
+        if(res.includes("✅ started")) showDivinePopup();
+        socket.emit("join",uid);
+      });
+    }
+
+    function stopBot(){
+      const uid=document.getElementById("adminUID").value.trim();
+      if(!uid){alert("⚠️ Enter Admin UID!");return;}
+      fetch(`/stop-bot?uid=${uid}`).then(r=>r.text()).then(alert);
+    }
+
+    function getLogs(){
+      const uid=document.getElementById("adminUID").value.trim();
+      if(!uid){alert("⚠️ Enter Admin UID!");return;}
+      fetch(`/logs?uid=${uid}`).then(r=>r.text()).then(t=>logDiv.innerText=t);
+    }
+
+    socket.on("botlog", msg=>{
+      logDiv.innerText += msg + "\n";
+      logDiv.scrollTop = logDiv.scrollHeight;
+    });
+
+    // Gold Floating Particles
+    for(let i=0;i<25;i++){
+      const p=document.createElement('div');
+      p.className='particle';
+      p.style.left=Math.random()*100+'%';
+      p.style.top=Math.random()*100+'%';
+      p.style.animationDelay=Math.random()*10+'s';
+      document.body.appendChild(p);
+    }
+  </script>
+</body>
+</html>
